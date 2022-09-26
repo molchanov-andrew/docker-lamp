@@ -27,11 +27,13 @@ RUN apt-get install -fyqq zip libzip-dev \
  && docker-php-ext-install zip \
  && apt-get remove -fyqq libzip-dev
 
+RUN a2enmod rewrite
+
 # Install xdebug
-# RUN pecl install xdebug \
-# && docker-php-ext-enable xdebug
+RUN pecl install xdebug \
+ && docker-php-ext-enable xdebug
 
 # Enable XDebug
-# ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
+ADD xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
 WORKDIR /app

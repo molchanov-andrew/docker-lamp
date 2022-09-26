@@ -8,6 +8,13 @@
  * Date 19 сент. 2022 г.
  * @var type Description
  */
+use src\classes\run;
+
+spl_autoload_register(function (string $className) {
+    include_once __DIR__ . '/' . str_replace('\\', '/', $className) . '.php';
+});
+
+$app = (new run())->getControllerAction();
 ?>
 <!DOCTYPE html>
 <html>
@@ -19,8 +26,10 @@
         <div>
             <img src='/img/under-construction.gif' alt="under-construction"/>
         </div>
-        <a href="/img/Molchanov_web_dev_CV.pdf" download>
-            <button>Download PDF</button>
-        </a>
+        <?php foreach ($app as $item) : ?>
+        <div>
+                <?= $item ?>
+            </div>
+        <?php endforeach ?>
     </body>
 </html>
